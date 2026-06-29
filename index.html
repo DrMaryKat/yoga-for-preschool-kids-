@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoga for Preschool Kids — Week 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sunshine: #FFD166;
+    --sky: #81D4FA;
+    --grass: #A8E6CF;
+    --coral: #FF8A80;
+    --coral-soft: #FFCDD2;
+    --teal: #26A69A;
+    --teal-soft: #B2DFDB;
+    --lavender: #CE93D8;
+    --cloud: #FFFDF7;
+    --earth: #5D4037;
+    --bark: #795548;
+    --deep-sky: #0288D1;
+    --text: #3E2723;
+    --shadow: rgba(93, 64, 55, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(180deg, #E1F5FE 0%, #E8F5E9 40%, #FFF8E1 100%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .clouds {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 200px; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .cloud {
+    position: absolute; background: white; border-radius: 50%;
+    opacity: 0.5; animation: drift linear infinite;
+  }
+  .cloud::before, .cloud::after {
+    content: ''; position: absolute; background: white; border-radius: 50%;
+  }
+  .cloud:nth-child(1) { width: 120px; height: 50px; top: 30px; left: -150px; animation-duration: 38s; }
+  .cloud:nth-child(1)::before { width: 60px; height: 60px; top: -30px; left: 20px; }
+  .cloud:nth-child(1)::after { width: 80px; height: 55px; top: -20px; left: 50px; }
+  .cloud:nth-child(2) { width: 160px; height: 55px; top: 70px; left: -200px; animation-duration: 50s; animation-delay: 8s; }
+  .cloud:nth-child(2)::before { width: 70px; height: 70px; top: -35px; left: 30px; }
+  .cloud:nth-child(2)::after { width: 90px; height: 60px; top: -25px; left: 70px; }
+  .cloud:nth-child(3) { width: 100px; height: 40px; top: 110px; left: -120px; animation-duration: 44s; animation-delay: 15s; }
+  .cloud:nth-child(3)::before { width: 50px; height: 50px; top: -25px; left: 15px; }
+  .cloud:nth-child(3)::after { width: 65px; height: 45px; top: -18px; left: 40px; }
+  @keyframes drift { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 300px)); } }
+
+  header {
+    position: relative; z-index: 2; text-align: center; padding: 40px 20px 10px;
+  }
+  header h1 {
+    font-family: 'Baloo 2', cursive; font-size: clamp(2.2rem, 6vw, 3.6rem);
+    color: var(--earth); text-shadow: 2px 3px 0 var(--sunshine); line-height: 1.1;
+  }
+  header h1 .sun { display: inline-block; animation: spin 12s linear infinite; font-size: 1.1em; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .subtitle {
+    font-family: 'Baloo 2', cursive; font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--deep-sky); margin-top: 4px; letter-spacing: 1px;
+  }
+  .week-badge {
+    display: inline-block; background: var(--sunshine); color: var(--earth);
+    font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1rem;
+    padding: 6px 22px; border-radius: 30px; margin-top: 10px; box-shadow: 0 3px 10px var(--shadow);
+  }
+
+  .container { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* ── Welcome ── */
+  .welcome {
+    background: var(--cloud); border-radius: 28px; padding: 0;
+    margin: 24px 0 36px; box-shadow: 0 8px 32px var(--shadow);
+    overflow: hidden; border: 3px dashed var(--grass);
+  }
+  .welcome-image { width: 100%; display: block; border-radius: 25px 25px 0 0; }
+  .pose-image-wrap video, .cooldown video { width: 100%; display: block; }
+  .welcome-content { padding: 24px 28px 28px; text-align: center; }
+  .welcome-content h2 { font-family: 'Baloo 2', cursive; font-size: 1.5rem; color: var(--bark); margin-bottom: 8px; }
+  .welcome-content p { font-size: 1.05rem; line-height: 1.7; color: #5D4037; max-width: 620px; margin: 0 auto 14px; }
+
+  .twin-labels { display: flex; justify-content: center; gap: 14px; margin-bottom: 14px; }
+  .twin-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Baloo 2', cursive; font-size: 1rem;
+    padding: 5px 16px; border-radius: 20px; font-weight: 600;
+  }
+  .twin-label.joy { background: var(--teal-soft); color: #00695C; }
+  .twin-label.hope { background: var(--coral-soft); color: #C62828; }
+  .twin-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .twin-label.joy .twin-dot { background: var(--teal); }
+  .twin-label.hope .twin-dot { background: var(--coral); }
+
+  /* ── Audio ── */
+  .audio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .audio-row {
+    display: flex; align-items: center; gap: 10px;
+    background: #F5F0EA; border-radius: 14px; padding: 7px 14px;
+    border-left: 4px solid var(--sunshine);
+  }
+  .audio-row.joy-audio { border-left: 4px solid var(--teal); }
+  .audio-row.hope-audio { border-left: 4px solid var(--coral); }
+  .audio-name { font-family: 'Baloo 2', cursive; font-size: 0.9rem; color: var(--bark); min-width: 46px; flex-shrink: 0; }
+  .audio-row audio { flex: 1; height: 34px; min-width: 0; }
+
+  /* ── Pose cards ── */
+  .pose-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+  .pose-card {
+    background: var(--cloud); border-radius: 28px; box-shadow: 0 8px 30px var(--shadow);
+    overflow: hidden; opacity: 0; transform: translateY(30px);
+    animation: fadeUp 0.6s ease-out forwards; transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .pose-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(93, 64, 55, 0.18); }
+  .pose-card:nth-child(1) { animation-delay: 0.1s; }
+  .pose-card:nth-child(2) { animation-delay: 0.2s; }
+  .pose-card:nth-child(3) { animation-delay: 0.3s; }
+  .pose-card:nth-child(4) { animation-delay: 0.4s; }
+  .pose-card:nth-child(5) { animation-delay: 0.5s; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  .pose-header { display: flex; align-items: center; gap: 16px; padding: 22px 26px; cursor: pointer; }
+  .pose-icon {
+    width: 68px; height: 68px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; flex-shrink: 0; box-shadow: 0 4px 14px var(--shadow);
+  }
+  .pose-card:nth-child(1) .pose-icon { background: linear-gradient(135deg, #FFE082, #FFD54F); }
+  .pose-card:nth-child(2) .pose-icon { background: linear-gradient(135deg, #A5D6A7, #66BB6A); }
+  .pose-card:nth-child(3) .pose-icon { background: linear-gradient(135deg, #90CAF9, #42A5F5); }
+  .pose-card:nth-child(4) .pose-icon { background: linear-gradient(135deg, #FFAB91, #FF7043); }
+  .pose-card:nth-child(5) .pose-icon { background: linear-gradient(135deg, #CE93D8, #AB47BC); }
+
+  .pose-title-block h3 { font-family: 'Baloo 2', cursive; font-size: 1.4rem; color: var(--earth); line-height: 1.2; }
+  .pose-title-block .animal-name { font-size: 0.9rem; color: var(--bark); font-weight: 600; opacity: 0.7; }
+  .expand-hint {
+    margin-left: auto; font-size: 1.4rem; color: var(--bark);
+    opacity: 0.4; transition: transform 0.3s ease, opacity 0.3s; flex-shrink: 0;
+  }
+  .pose-card.open .expand-hint { transform: rotate(180deg); opacity: 0.7; }
+
+  .pose-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; padding: 0 26px; }
+  .pose-card.open .pose-body { max-height: 1400px; padding: 0 26px 26px; }
+
+  .pose-image-wrap { margin-bottom: 16px; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 16px var(--shadow); }
+  .pose-image-wrap img { width: 100%; display: block; }
+  .pose-image-placeholder {
+    width: 100%; height: 180px;
+    background: linear-gradient(135deg, #E8F5E9, #FFF8E1);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Baloo 2', cursive; color: var(--bark); opacity: 0.5;
+    font-size: 0.95rem; border-radius: 18px; margin-bottom: 16px;
+  }
+
+  .steps-section h4 {
+    font-family: 'Baloo 2', cursive; font-size: 1.05rem; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .steps-section h4.joy-section { color: #00695C; }
+  .steps-section h4.hope-section { color: #C62828; }
+
+  .pose-body .steps { list-style: none; counter-reset: step; padding: 0; margin-bottom: 14px; }
+  .pose-body .steps li {
+    counter-increment: step; position: relative;
+    padding: 7px 0 7px 42px; font-size: 1rem; line-height: 1.6;
+    color: #4E342E; border-bottom: 1px dashed #E0D5C8;
+  }
+  .pose-body .steps li:last-child { border-bottom: none; }
+  .pose-body .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 7px;
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 0.85rem;
+  }
+  .joy-steps li::before { background: var(--teal-soft); color: #00695C; }
+  .hope-steps li::before { background: var(--coral-soft); color: #C62828; }
+
+  .breath-cue {
+    display: inline-block; background: var(--sky); color: white;
+    font-weight: 700; font-size: 0.75rem; padding: 2px 10px;
+    border-radius: 20px; margin-left: 4px; vertical-align: middle;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .section-divider { border: none; border-top: 2px dashed #D7CCC8; margin: 12px 0; }
+
+  .teacher-tip {
+    background: linear-gradient(135deg, #FFF9C4, #FFF176);
+    border-radius: 14px; padding: 14px 16px; margin-top: 14px;
+    font-size: 0.9rem; line-height: 1.6; border-left: 5px solid var(--sunshine);
+  }
+  .teacher-tip strong { font-family: 'Baloo 2', cursive; color: var(--earth); }
+
+  /* ── Cool-down ── */
+  .cooldown {
+    background: linear-gradient(135deg, #E8EAF6, #C5CAE9);
+    border-radius: 28px; padding: 0; margin-top: 36px;
+    box-shadow: 0 8px 30px var(--shadow); overflow: hidden;
+  }
+  .cooldown-image { width: 100%; display: block; }
+  .cooldown-content { padding: 26px 28px; text-align: center; }
+  .cooldown h2 { font-family: 'Baloo 2', cursive; font-size: 1.4rem; color: #283593; margin-bottom: 10px; }
+  .cooldown p { font-size: 1rem; line-height: 1.7; color: #37474F; max-width: 620px; margin: 0 auto; }
+
+  /* ── Breathing bubble ── */
+  .breathe-section { text-align: center; margin-top: 36px; }
+  .breathe-section h2 { font-family: 'Baloo 2', cursive; font-size: 1.35rem; color: var(--earth); margin-bottom: 14px; }
+  .breathe-bubble {
+    width: 125px; height: 125px; margin: 0 auto; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #B3E5FC, #4FC3F7);
+    box-shadow: 0 6px 30px rgba(79, 195, 247, 0.35);
+    animation: breathe 6s ease-in-out infinite;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .breathe-bubble span { font-family: 'Baloo 2', cursive; font-size: 0.9rem; color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+  @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+  .breathe-label { font-size: 0.9rem; color: var(--bark); margin-top: 10px; font-weight: 600; }
+
+  footer { text-align: center; padding: 40px 20px 30px; position: relative; z-index: 2; }
+  footer .grass-row { font-size: 2rem; letter-spacing: 4px; line-height: 1; margin-bottom: 10px; }
+  footer p { font-size: 0.85rem; color: var(--bark); opacity: 0.6; font-family: 'Quicksand', sans-serif; font-weight: 600; }
+
+  @media (min-width: 600px) {
+    .pose-header { padding: 24px 32px; }
+    .pose-body { padding: 0 32px; }
+    .pose-card.open .pose-body { padding: 0 32px 28px; }
+    .welcome-content { padding: 28px 34px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="clouds"><div class="cloud"></div><div class="cloud"></div><div class="cloud"></div></div>
+
+<header>
+  <h1><span class="sun">&#9728;&#65039;</span> Yoga for Preschool Kids</h1>
+  <div class="subtitle">Stretch, Breathe &amp; Play!</div>
+  <div class="week-badge">&#127793; Week 1 — Animal Friends</div>
+</header>
+
+<div class="container">
+
+  <!-- ═══ WELCOME ═══ -->
+  <div class="welcome">
+    <video autoplay muted loop playsinline class="welcome-image" poster="welcome.png">
+      <source src="welcome-video.mp4" type="video/mp4">
+      <img src="welcome.png" alt="Yogi Joy and Yogi Hope, twin sisters in namaste pose">
+    </video>
+    <div class="welcome-content">
+      <div class="twin-labels">
+        <span class="twin-label joy"><span class="twin-dot"></span> Yogi Joy</span>
+        <span class="twin-label hope"><span class="twin-dot"></span> Yogi Hope</span>
+      </div>
+      <h2>&#129495; Welcome, Little Yogis!</h2>
+      <p>Meet <strong>Yogi Joy</strong> and her twin sister <strong>Yogi Hope</strong>! Joy loves to jump and play, and Hope loves to breathe and stay calm. Together, they're taking you on a yoga adventure with <strong>animal friends</strong>! Click each animal below to learn the pose!</p>
+      <div class="audio-group">
+        <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="welcome.mp3" type="audio/mpeg"></audio></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ POSES ═══ -->
+  <div class="pose-grid">
+
+    <!-- 1. Cat & Cow -->
+    <div class="pose-card" onclick="toggleCard(this)">
+      <div class="pose-header">
+        <div class="pose-icon">&#128049;</div>
+        <div class="pose-title-block"><h3>Cat &amp; Cow</h3><span class="animal-name">Kitty Cat Stretch</span></div>
+        <span class="expand-hint">&#9660;</span>
+      </div>
+      <div class="pose-body">
+        <div class="pose-image-wrap"><video autoplay muted loop playsinline poster="cat-cow.png"><source src="cat-cow-video.mp4" type="video/mp4"><img src="cat-cow.png" alt="Joy and Hope in cat and cow pose"></video></div>
+        <div class="steps-section">
+          <h4 class="joy-section"><span class="twin-dot" style="background:var(--teal);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Joy says:</h4>
+          <ol class="steps joy-steps">
+            <li>Get down on your hands and knees, like a kitty cat! Hands under your shoulders, knees under your hips.</li>
+            <li>Scared kitty! Push your back up reeeally high and look down at your tummy! <span class="breath-cue">Breathe Out</span></li>
+            <li>Happy cow! Let your tummy go down and look up at the ceiling! <span class="breath-cue">Breathe In</span></li>
+            <li>Keep going! Scared kitty... happy cow! You can meow and moo! Do it 5 times!</li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+        <div class="steps-section">
+          <h4 class="hope-section"><span class="twin-dot" style="background:var(--coral);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Hope says:</h4>
+          <ol class="steps hope-steps">
+            <li>Now let's add the breathing. Scared kitty — breathe out real slow. Haaaah.</li>
+            <li>Happy cow — breathe in real big. Mmmmm.</li>
+            <li>Two more together. Scared kitty... out... happy cow... in. Beautiful!</li>
+          </ol>
+        </div>
+        <div class="audio-group">
+          <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="cat-cow.mp3" type="audio/mpeg"></audio></div>
+        </div>
+        <div class="teacher-tip"><strong>&#127822; Teacher Tip:</strong> Invite children to make soft "meow" sounds on the cat stretch and "moo" on the cow. This helps cue the breathing rhythm naturally.</div>
+      </div>
+    </div>
+
+    <!-- 2. Tree -->
+    <div class="pose-card" onclick="toggleCard(this)">
+      <div class="pose-header">
+        <div class="pose-icon">&#127795;</div>
+        <div class="pose-title-block"><h3>Tree Pose</h3><span class="animal-name">Tall Tall Tree</span></div>
+        <span class="expand-hint">&#9660;</span>
+      </div>
+      <div class="pose-body">
+        <div class="pose-image-wrap"><video autoplay muted loop playsinline poster="tree.png"><source src="tree-video.mp4" type="video/mp4"><img src="tree.png" alt="Joy and Hope in tree pose"></video></div>
+        <div class="steps-section">
+          <h4 class="joy-section"><span class="twin-dot" style="background:var(--teal);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Joy says:</h4>
+          <ol class="steps joy-steps">
+            <li>Stand up real tall! Like, the tallest tree you ever saw!</li>
+            <li>Pick up one foot and put it on your other ankle. Like a kickstand on a bike!</li>
+            <li>If you're a little wobbly, that's okay! Even real trees sway in the wind!</li>
+            <li>Arms up super high — those are your tree branches! Wiggle your fingers — those are your leaves!</li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+        <div class="steps-section">
+          <h4 class="hope-section"><span class="twin-dot" style="background:var(--coral);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Hope says:</h4>
+          <ol class="steps hope-steps">
+            <li>Find something to look at on the wall. Just one spot. That helps you balance.</li>
+            <li>Let's breathe. One... two... three... four... five.</li>
+            <li>Now switch feet! Other side. Arms up, wiggle those leaves!</li>
+            <li>One... two... three... four... five. You are the most beautiful tree!</li>
+          </ol>
+        </div>
+        <div class="audio-group">
+          <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="tree.mp3" type="audio/mpeg"></audio></div>
+        </div>
+        <div class="teacher-tip"><strong>&#127822; Teacher Tip:</strong> "Kickstand" (toes still on the floor) is a great modification. Encourage them to find a "focus spot" on the wall.</div>
+      </div>
+    </div>
+
+    <!-- 3. Frog -->
+    <div class="pose-card" onclick="toggleCard(this)">
+      <div class="pose-header">
+        <div class="pose-icon">&#128056;</div>
+        <div class="pose-title-block"><h3>Frog Pose</h3><span class="animal-name">Hoppy Frog</span></div>
+        <span class="expand-hint">&#9660;</span>
+      </div>
+      <div class="pose-body">
+        <div class="pose-image-wrap"><video autoplay muted loop playsinline poster="frog.png"><source src="frog-video.mp4" type="video/mp4"><img src="frog.png" alt="Joy and Hope in frog pose"></video></div>
+        <div class="steps-section">
+          <h4 class="joy-section"><span class="twin-dot" style="background:var(--teal);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Joy says:</h4>
+          <ol class="steps joy-steps">
+            <li>Stand with your feet kinda wide and turn your toes out. Like frog feet!</li>
+            <li>Squaaaat down real low. Hands together by your heart.</li>
+            <li>Now we HOP! Jump! RIBBIT! Land super soft, like you're on a lily pad!</li>
+            <li>Five hops! Jump, ribbit! Jump, ribbit! Jump, ribbit! Jump, ribbit! One more BIG one!</li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+        <div class="steps-section">
+          <h4 class="hope-section"><span class="twin-dot" style="background:var(--coral);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Hope says:</h4>
+          <ol class="steps hope-steps">
+            <li>Squat back down, little froggies. That was a lot of hopping!</li>
+            <li>Rest like a frog on a lily pad. Close your eyes.</li>
+            <li>Three belly breaths. In... big tummy... out. In... out. One more... in... out. <span class="breath-cue">Breathe</span></li>
+          </ol>
+        </div>
+        <div class="audio-group">
+          <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="frog.mp3" type="audio/mpeg"></audio></div>
+        </div>
+        <div class="teacher-tip"><strong>&#127822; Teacher Tip:</strong> Great for releasing energy mid-session. Remind children to land softly like they're on a lily pad!</div>
+      </div>
+    </div>
+
+    <!-- 4. Cobra -->
+    <div class="pose-card" onclick="toggleCard(this)">
+      <div class="pose-header">
+        <div class="pose-icon">&#128013;</div>
+        <div class="pose-title-block"><h3>Cobra Pose</h3><span class="animal-name">Sneaky Snake</span></div>
+        <span class="expand-hint">&#9660;</span>
+      </div>
+      <div class="pose-body">
+        <div class="pose-image-wrap"><video autoplay muted loop playsinline poster="cobra.png"><source src="cobra-video.mp4" type="video/mp4"><img src="cobra.png" alt="Joy and Hope in cobra pose"></video></div>
+        <div class="steps-section">
+          <h4 class="joy-section"><span class="twin-dot" style="background:var(--teal);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Joy says:</h4>
+          <ol class="steps joy-steps">
+            <li>Lie on your tummy. Legs straight behind you. Hands flat next to your shoulders.</li>
+            <li>Breathe in and push up! Lift your head and chest — just a little! <span class="breath-cue">Breathe In</span></li>
+            <li>Shoulders down, away from your ears. Look up and go HISSSSSS! <span class="breath-cue">Breathe Out</span></li>
+            <li>Slowly down. Do it 3 times! Push up... HISSSSSS... and down!</li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+        <div class="steps-section">
+          <h4 class="hope-section"><span class="twin-dot" style="background:var(--coral);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Hope says:</h4>
+          <ol class="steps hope-steps">
+            <li>Stay on your tummy. Rest your cheek on your hands.</li>
+            <li>Feel how warm your back feels? Your muscles worked hard!</li>
+            <li>Two easy breaths. In... and out. In... and out. <span class="breath-cue">Breathe</span></li>
+          </ol>
+        </div>
+        <div class="audio-group">
+          <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="cobra.mp3" type="audio/mpeg"></audio></div>
+        </div>
+        <div class="teacher-tip"><strong>&#127822; Teacher Tip:</strong> Press hip bones into the mat, keep shoulders relaxed. A small lift is perfect — no full extension at this age.</div>
+      </div>
+    </div>
+
+    <!-- 5. Butterfly -->
+    <div class="pose-card" onclick="toggleCard(this)">
+      <div class="pose-header">
+        <div class="pose-icon">&#129419;</div>
+        <div class="pose-title-block"><h3>Butterfly Pose</h3><span class="animal-name">Flutter Flutter</span></div>
+        <span class="expand-hint">&#9660;</span>
+      </div>
+      <div class="pose-body">
+        <div class="pose-image-wrap"><video autoplay muted loop playsinline poster="butterfly.png"><source src="butterfly-video.mp4" type="video/mp4"><img src="butterfly.png" alt="Joy and Hope in butterfly pose"></video></div>
+        <div class="steps-section">
+          <h4 class="joy-section"><span class="twin-dot" style="background:var(--teal);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Joy says:</h4>
+          <ol class="steps joy-steps">
+            <li>Sit down and put your feet together. Like your feet are giving each other a high five!</li>
+            <li>Hold your toes. Let your knees go out — those are your butterfly wings!</li>
+            <li>Flap them! Up and down! Go fast! Flutter flutter flutter!</li>
+            <li>Now super slow. Uuuup... and dooown. Uuuup... and dooown.</li>
+          </ol>
+        </div>
+        <hr class="section-divider">
+        <div class="steps-section">
+          <h4 class="hope-section"><span class="twin-dot" style="background:var(--coral);width:8px;height:8px;border-radius:50%;display:inline-block"></span> Hope says:</h4>
+          <ol class="steps hope-steps">
+            <li>Breathe in... breathe out and lean forward a teensy bit. Smell a flower! <span class="breath-cue">Breathe Out</span></li>
+            <li>What color are your wings? Joy's are teal! Mine are coral!</li>
+            <li>Keep flapping slow. In... out. In... out. In... out. <span class="breath-cue">Breathe</span></li>
+          </ol>
+        </div>
+        <div class="audio-group">
+          <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="butterfly.mp3" type="audio/mpeg"></audio></div>
+        </div>
+        <div class="teacher-tip"><strong>&#127822; Teacher Tip:</strong> Ask children to name the color and pattern of their butterfly wings to engage imagination and settle energy.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ COOL-DOWN ═══ -->
+  <div class="cooldown">
+    <div class="pose-image-wrap" style="margin:0;border-radius:0;box-shadow:none;">
+      <video autoplay muted loop playsinline class="cooldown-image" poster="cooldown.png">
+        <source src="cooldown-video.mp4" type="video/mp4">
+        <img src="cooldown.png" alt="Joy and Hope lying as sleepy stars">
+      </video>
+    </div>
+    <div class="cooldown-content">
+      <h2>&#127769; Cool-Down: Sleepy Star</h2>
+      <div class="twin-labels" style="margin-bottom:10px;">
+        <span class="twin-label joy"><span class="twin-dot"></span> Joy</span>
+        <span class="twin-label hope"><span class="twin-dot"></span> Hope</span>
+      </div>
+      <p><strong>Joy:</strong> We did SO good today! High five! Lie down on your back and stretch out like a big star! A sleepy star. Hope is gonna help you relax now.</p>
+      <p style="margin-top:10px;"><strong>Hope:</strong> Close your eyes. Shhh. Feel your tummy going up... and down. You are so strong. You are so brave. You are so awesome. Take five slow breaths... wiggle your fingers and toes... and give yourself the biggest hug ever. You are a YOGA STAR!</p>
+      <p style="margin-top:10px;font-family:'Baloo 2',cursive;font-size:1.15rem;color:#283593;"><strong>Joy:</strong> Namaste, friends!<br><strong>Hope:</strong> That means the light in me...<br><strong>Joy:</strong> ...sees the light in YOU!<br><strong>Hope:</strong> See you next time! &#128591;</p>
+      <div class="audio-group" style="max-width:380px;margin:14px auto 0;">
+        <div class="audio-row"><span class="audio-name">Listen</span><audio controls preload="none"><source src="cooldown.mp3" type="audio/mpeg"></audio></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BREATHING BUBBLE ═══ -->
+  <div class="breathe-section">
+    <h2>&#129707; Belly Breathing Bubble</h2>
+    <div class="breathe-bubble"><span>Breathe...</span></div>
+    <div class="breathe-label">Watch the bubble grow and shrink — breathe along with it!</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="grass-row">&#127807;&#127793;&#127806;&#127807;&#127793;&#127806;&#127807;&#127793;&#127806;</div>
+  <p>Yoga for Preschool Kids &middot; Week 1: Animal Friends</p>
+  <p>&copy; 2026 Dr. Mary K Boudreaux, EdD</p>
+</footer>
+
+<script>
+function toggleCard(card) {
+  document.querySelectorAll('.pose-card.open').forEach(c => { if (c !== card) c.classList.remove('open'); });
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
